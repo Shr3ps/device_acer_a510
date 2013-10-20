@@ -10,8 +10,6 @@ TARGET_ARCH := arm
 TARGET_ARCH_VARIANT := armv7-a-neon
 TARGET_ARCH_VARIANT_CPU := cortex-a9
 TARGET_CPU_VARIANT := cortex-a9
-ARCH_ARM_HAVE_TLS_REGISTER := true
-ARCH_ARM_USE_NON_NEON_MEMCPY := true
 
 TARGET_NO_BOOTLOADER := true
 TARGET_BOOTLOADER_BOARD_NAME := picasso_m
@@ -28,7 +26,10 @@ BOARD_RECOVERYIMAGE_PARTITION_SIZE := 6291456
 BOARD_SYSTEMIMAGE_PARTITION_SIZE := 629145600
 BOARD_USERDATAIMAGE_PARTITION_SIZE := 29905387520
 BOARD_FLASH_BLOCK_SIZE := 4096
-RECOVERY_FSTAB_VERSION := 1
+#RECOVERY_FSTAB_VERSION := 1
+#TARGET_RECOVERY_FSTAB := device/acer/a510/fstab.a510
+TARGET_RECOVERY_FSTAB := device/acer/t30-common/prebuilt/ramdisk/fstab.acer
+RECOVERY_FSTAB_VERSION := 2
 
 # Wifi related defines
 BOARD_WPA_SUPPLICANT_DRIVER := NL80211
@@ -41,7 +42,7 @@ BOARD_WLAN_DEVICE           := bcmdhd
 WIFI_DRIVER_FW_PATH_PARAM   := "/sys/module/bcmdhd/parameters/firmware_path"
 WIFI_DRIVER_FW_PATH_STA     := "/vendor/firmware/fw_bcmdhd.bin"
 WIFI_DRIVER_FW_PATH_AP      := "/vendor/firmware/fw_bcmdhd_apsta.bin"
-WIFI_DRIVER_FW_PATH_P2P     := "/vendor/firmware/fw_bcmdhd_p2p.bin"
+#WIFI_DRIVER_FW_PATH_P2P     := "/vendor/firmware/fw_bcmdhd_p2p.bin"
 
 TARGET_KERNEL_SOURCE := kernel/acer/t30_kiteman44
 TARGET_KERNEL_CONFIG := cyanogenmod_picasso_m_defconfig
@@ -72,3 +73,18 @@ BOARD_HAS_LARGE_FILESYSTEM := true
 # Samsung EMMC brick bug
 # Already disabled in kernel, but disable again for safety
 BOARD_SUPPRESS_EMMC_WIPE := true
+
+BOARD_SEPOLICY_DIRS += \
+        device/acer/t30-common/sepolicy
+
+BOARD_SEPOLICY_UNION += \
+        file_contexts \
+        genfs_contexts \
+        app.te \
+        device.te \
+        drmserver.te \
+        file.te \
+        mediaserver.te \
+        surfaceflinger.te \
+        system.te \
+        zygote.te

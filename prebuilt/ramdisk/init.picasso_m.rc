@@ -27,7 +27,7 @@ on init
 on fs
     setprop ro.crypto.tmpfs_options size=128m,mode=0771,uid=1000,gid=1000
     setprop ro.crypto.umount_sd false
-    mount_all /fstab.picasso_m
+    mount_all /fstab.acer
 
 on post-fs-data
     mkdir /data/misc/wifi 0770 wifi wifi
@@ -62,6 +62,8 @@ on boot
     chmod 0660 /sys/class/rfkill/rfkill0/type
     chown bluetooth net_bt_stack /sys/class/rfkill/rfkill0/state
     chown bluetooth net_bt_stack /sys/class/rfkill/rfkill0/type
+    restorecon /sys/devices/platform/bcm4329_rfkill/rfkill/rfkill0/state
+    restorecon /sys/devices/platform/bcm4329_rfkill/rfkill/rfkill0/type
     chown bluetooth net_bt_stack /sys/dev-info_bt/vendor
 
     # bluetooth MAC address programming
@@ -89,6 +91,10 @@ on boot
     chown system system /sys/Touch/plugged
     chown system system /sys/Touch/sensitivity_raw
     chown system system /sys/Touch/filter
+    restorecon /sys/Touch/sensitivity_raw
+
+# Default to "very high" sensitivity
+    write /sys/Touch/sensitivity_raw 50
 
 # powerkey led
     chown system system /sys/class/leds/acer-leds/brightness
@@ -129,10 +135,29 @@ on boot
     write /sys/module/cpu_tegra3/parameters/auto_hotplug 1
     write /sys/module/cpuidle/parameters/lp2_in_idle 1
 
+    restorecon /sys/devices/system/cpu
+    restorecon /sys/devices/system/cpu/cpu0/cpufreq/scaling_max_freq
+    restorecon /sys/devices/system/cpu/cpufreq/interactive/above_hispeed_delay
+    restorecon /sys/devices/system/cpu/cpufreq/interactive/boost
+    restorecon /sys/devices/system/cpu/cpufreq/interactive/boost_factor
+    restorecon /sys/devices/system/cpu/cpufreq/interactive/go_hispeed_load
+    restorecon /sys/devices/system/cpu/cpufreq/interactive/go_maxspeed_load
+    restorecon /sys/devices/system/cpu/cpufreq/interactive/hispeed_freq
+    restorecon /sys/devices/system/cpu/cpufreq/interactive/input_boost
+    restorecon /sys/devices/system/cpu/cpufreq/interactive/io_is_busy
+    restorecon /sys/devices/system/cpu/cpufreq/interactive/max_boost
+    restorecon /sys/devices/system/cpu/cpufreq/interactive/min_sample_time
+    restorecon /sys/devices/system/cpu/cpufreq/interactive/sustain_load
+    restorecon /sys/devices/system/cpu/cpufreq/interactive/timer_rate
+    restorecon /sys/devices/tegradc.0/smartdimmer/aggressiveness
+    restorecon /sys/devices/tegradc.0/smartdimmer/enable
+
     chown system system /sys/devices/system/cpu/cpufreq/interactive/go_maxspeed_load
     chown system system /sys/devices/system/cpu/cpufreq/interactive/max_boost
     chown system system /sys/dev-power_mode/power_mode
+    restorecon /sys/dev-power_mode/power_mode
 
+    write /sys/dev-power_mode/power_mode 2
     write /sys/module/cpu_tegra/parameters/performance_mode 0
     write /sys/module/cpu_tegra/parameters/balanced_mode 1200000
     write /sys/module/cpu_tegra/parameters/powersaving_mode 1200000
@@ -203,7 +228,8 @@ service dhcpcd_p2p /system/bin/dhcpcd -aABKL
      disabled
      oneshot
 
-service dhcpcd_bnep0 /system/bin/dhcpcd -ABKL
+#service dhcpcd_bnep0 /system/bin/dhcpcd -ABKL
+service dhcpcd_bt-pan /system/bin/dhcpcd -ABKL
     class main
     disabled
     oneshot
@@ -224,6 +250,11 @@ service iprenew_usb0 /system/bin/dhcpcd -n
     oneshot
 
 service iprenew_p2p /system/bin/dhcpcd -n
+    class main
+    disabled
+    oneshot
+
+service iprenew_bt-pan /system/bin/dhcpcd -n
     class main
     disabled
     oneshot
@@ -291,3 +322,15 @@ on boot
 #     class late_start
 #     user system
 
+# Performance mode
+# Powersave
+on property:sys.cpu.mode=0
+    write /sys/dev-power_mode/power_mode 3
+
+# Balanced
+on property:sys.cpu.mode=1
+    write /sys/dev-power_mode/power_mode 2
+
+# Performance
+on property:sys.cpu.mode=2
+    write /sys/dev-power_mode/power_mode 1

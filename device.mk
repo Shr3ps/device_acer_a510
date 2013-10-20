@@ -31,9 +31,14 @@ include frameworks/native/build/tablet-7in-hdpi-1024-dalvik-heap.mk
 # we have enough storage space to hold precise GC data
 PRODUCT_TAGS += dalvik.gc.type-precise
 
+#    device/acer/a510/prebuilt/ramdisk/fstab.picasso_m:root/fstab.picasso_m \
+#    device/acer/a510/prebuilt/ramdisk/ueventd.picasso_m.rc:root/ueventd.picasso_m.rc \
+#
+
 PRODUCT_COPY_FILES += \
     device/acer/a510/prebuilt/ramdisk/init.picasso_m.rc:root/init.picasso_m.rc \
-    device/acer/a510/prebuilt/ramdisk/fstab.picasso_m:root/fstab.picasso_m \
+    device/acer/t30-common/prebuilt/ramdisk/fstab.acer:root/fstab.acer \
+    device/acer/t30-common/prebuilt/ramdisk/fstab.acer:root/fstab.picasso_m \
     device/acer/a510/prebuilt/ramdisk/ueventd.picasso_m.rc:root/ueventd.picasso_m.rc \
     device/acer/a510/prebuilt/ramdisk/init.picasso_m.usb.rc:root/init.picasso_m.usb.rc \
 
@@ -51,8 +56,8 @@ PRODUCT_COPY_FILES += \
     frameworks/native/data/etc/android.hardware.usb.host.xml:system/etc/permissions/android.hardware.usb.host.xml \
     frameworks/native/data/etc/android.hardware.usb.accessory.xml:system/etc/permissions/android.hardware.usb.accessory.xml
 
+#    device/acer/a510/prebuilt/etc/vold.fstab:system/etc/vold.fstab 
 PRODUCT_COPY_FILES += \
-    device/acer/a510/prebuilt/etc/vold.fstab:system/etc/vold.fstab \
     device/acer/a510/prebuilt/etc/gps/gpsconfig.xml:system/etc/gps/gpsconfig.xml \
     device/acer/a510/prebuilt/usr/idc/acer-touch.idc:system/usr/idc/acer-touch.idc \
     device/acer/a510/prebuilt/usr/keylayout/Acer-AK00LB.kl:system/usr/keylayout/Acer-AK00LB.kl \
@@ -77,9 +82,9 @@ PRODUCT_PACKAGES := \
 PRODUCT_CHARACTERISTICS := tablet
 
 # Device-specific packages
-PRODUCT_PACKAGES += \
-    DeviceParts
-
+#PRODUCT_PACKAGES += \
+#    DeviceParts
+#
 # Audio config
 PRODUCT_COPY_FILES += \
     device/acer/a510/tiny_hw.xml:system/etc/sound/picasso_m \
