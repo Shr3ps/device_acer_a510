@@ -24,6 +24,9 @@ PRODUCT_DEFAULT_PROPERTY_OVERRIDES += \
 # by the bootloader everytime we boot into recovery
 PRODUCT_PROPERTY_OVERRIDES += \
     dalvik.vm.dexopt-data-only=1
+# Disable SELinux
+PRODUCT_PROPERTY_OVERRIDES += \
+    ro.boot.selinux=disabled
 
 # The "7 inch" profile is more suited for us than the general profile
 include frameworks/native/build/tablet-7in-hdpi-1024-dalvik-heap.mk
@@ -53,6 +56,7 @@ PRODUCT_COPY_FILES += \
     frameworks/native/data/etc/android.hardware.camera.front.xml:system/etc/permissions/android.hardware.camera.front.xml \
     frameworks/native/data/etc/android.hardware.touchscreen.multitouch.jazzhand.xml:system/etc/permissions/android.hardware.touchscreen.multitouch.jazzhand.xml \
     frameworks/native/data/etc/android.software.sip.voip.xml:system/etc/permissions/android.software.sip.voip.xml \
+    frameworks/native/data/etc/android.hardware.bluetooth_le.xml:system/etc/permissions/android.hardware.bluetooth_le.xml \
     frameworks/native/data/etc/android.hardware.usb.host.xml:system/etc/permissions/android.hardware.usb.host.xml \
     frameworks/native/data/etc/android.hardware.usb.accessory.xml:system/etc/permissions/android.hardware.usb.accessory.xml
 
@@ -96,8 +100,8 @@ PRODUCT_COPY_FILES += \
     device/acer/a510/prebuilt/etc/media_codecs.xml:system/etc/media_codecs.xml
 
 # Bluetooth config file
-PRODUCT_COPY_FILES += \
-    system/bluetooth/data/main.nonsmartphone.conf:system/etc/bluetooth/main.conf \
+#PRODUCT_COPY_FILES += \
+#    system/bluetooth/data/main.nonsmartphone.conf:system/etc/bluetooth/main.conf \
 
 WIFI_BAND := 802_11_BG
 $(call inherit-product-if-exists, hardware/broadcom/wlan/bcmdhd/firmware/bcm4330/device-bcm.mk)
