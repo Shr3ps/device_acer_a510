@@ -74,17 +74,17 @@ BOARD_HAS_LARGE_FILESYSTEM := true
 # Already disabled in kernel, but disable again for safety
 BOARD_SUPPRESS_EMMC_WIPE := true
 
-BOARD_SEPOLICY_DIRS += \
-        device/acer/t30-common/sepolicy
+#BOARD_SEPOLICY_DIRS += \
+#        device/acer/t30-common/sepolicy
 
-BOARD_SEPOLICY_UNION += \
-        file_contexts \
-        genfs_contexts \
-        app.te \
-        device.te \
-        drmserver.te \
-        file.te \
-        mediaserver.te \
-        surfaceflinger.te \
-        system.te \
-        zygote.te
+#BOARD_SEPOLICY_UNION += \
+#        file_contexts \
+#        genfs_contexts \
+#        app.te \
+#        device.te \
+#        drmserver.te \
+#        file.te \
+#        mediaserver.te \
+#        surfaceflinger.te \
+#        system.te \
+#        zygote.te
