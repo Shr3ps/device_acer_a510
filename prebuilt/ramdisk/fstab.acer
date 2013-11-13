@@ -15,5 +15,5 @@
 /dev/block/platform/sdhci-tegra.3/by-name/USP           /staging            emmc      defaults                                              defaults
 
 # Vold
-/devices/platform/sdhci-tegra.0/mmc_host/mmc2           /storage/sdcard1    auto      defaults                                              voldmanaged=sdcard1:auto
-/devices/platform/tegra-ehci                            /storage/usb0       auto      defaults                                              voldmanaged=usb0:auto
+/devices/platform/sdhci-tegra.0/mmc_host/mmc2           auto                auto      defaults                                              voldmanaged=sdcard1:auto
+/devices/platform/tegra-ehci                            auto                auto      defaults                                              voldmanaged=usb0:auto
