@@ -27,6 +27,7 @@
             <ctl name="Int Spk Switch" val="1" />
             <ctl name="Right Speaker Mixer DACR Switch" val="1" />
             <ctl name="Left Speaker Mixer DACL Switch" val="1" />
+	    <ctl name="Speaker Volume" val="60" />
         </path>
         <path name="off">
             <ctl name="Int Spk Switch" val="0" />
