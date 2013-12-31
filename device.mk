@@ -13,8 +13,13 @@ PRODUCT_AAPT_PREF_CONFIG := xlarge hdpi
 DEVICE_PACKAGE_OVERLAYS += device/acer/a510/overlay
 
 PRODUCT_PROPERTY_OVERRIDES := \
+    ro.opengles.version=131072 \
+    persist.tegra.nvmmlite=1 \
+    nvidia.hwc.mirror_mode=crop \
+    tf.enable=y \
     wifi.interface=wlan0 \
-    ro.carrier=wifi-only
+    ro.carrier=wifi-only \
+    ro.zygote.disable_gl_preload=true \
 
 # Set default USB interface
 PRODUCT_DEFAULT_PROPERTY_OVERRIDES += \
@@ -24,9 +29,6 @@ PRODUCT_DEFAULT_PROPERTY_OVERRIDES += \
 # by the bootloader everytime we boot into recovery
 PRODUCT_PROPERTY_OVERRIDES += \
     dalvik.vm.dexopt-data-only=1
-# Disable SELinux
-PRODUCT_PROPERTY_OVERRIDES += \
-    ro.boot.selinux=disabled
 
 # The "7 inch" profile is more suited for us than the general profile
 include frameworks/native/build/tablet-7in-hdpi-1024-dalvik-heap.mk
@@ -56,11 +58,10 @@ PRODUCT_COPY_FILES += \
     frameworks/native/data/etc/android.hardware.camera.front.xml:system/etc/permissions/android.hardware.camera.front.xml \
     frameworks/native/data/etc/android.hardware.touchscreen.multitouch.jazzhand.xml:system/etc/permissions/android.hardware.touchscreen.multitouch.jazzhand.xml \
     frameworks/native/data/etc/android.software.sip.voip.xml:system/etc/permissions/android.software.sip.voip.xml \
-    frameworks/native/data/etc/android.hardware.bluetooth_le.xml:system/etc/permissions/android.hardware.bluetooth_le.xml \
     frameworks/native/data/etc/android.hardware.usb.host.xml:system/etc/permissions/android.hardware.usb.host.xml \
     frameworks/native/data/etc/android.hardware.usb.accessory.xml:system/etc/permissions/android.hardware.usb.accessory.xml
 
-#    device/acer/a510/prebuilt/etc/vold.fstab:system/etc/vold.fstab 
+#    device/acer/a510/prebuilt/etc/vold.fstab:system/etc/vold.fstab
 PRODUCT_COPY_FILES += \
     device/acer/a510/prebuilt/etc/gps/gpsconfig.xml:system/etc/gps/gpsconfig.xml \
     device/acer/a510/prebuilt/usr/idc/acer-touch.idc:system/usr/idc/acer-touch.idc \

@@ -44,7 +44,11 @@ WIFI_DRIVER_FW_PATH_STA     := "/vendor/firmware/fw_bcmdhd.bin"
 WIFI_DRIVER_FW_PATH_AP      := "/vendor/firmware/fw_bcmdhd_apsta.bin"
 #WIFI_DRIVER_FW_PATH_P2P     := "/vendor/firmware/fw_bcmdhd_p2p.bin"
 
-TARGET_KERNEL_SOURCE := kernel/acer/t30_kiteman44
+# Wi-Fi AP
+BOARD_LEGACY_NL80211_STA_EVENTS := true
+BOARD_NO_APSME_ATTR := true
+
+TARGET_KERNEL_SOURCE := kernel/acer/t30
 TARGET_KERNEL_CONFIG := cyanogenmod_picasso_m_defconfig
 
 # Avoid the generation of ldrcc instructions
@@ -64,7 +68,14 @@ BOARD_BLUETOOTH_BDROID_BUILDCFG_INCLUDE_DIR := device/acer/a510/bluetooth
 
 USE_OPENGL_RENDERER := true
 BOARD_EGL_CFG := device/acer/a510/prebuilt/etc/egl.cfg
-BOARD_EGL_NEEDS_LEGACY_FB := true
+#BOARD_EGL_NEEDS_LEGACY_FB := true
+BOARD_EGL_SKIP_FIRST_DEQUEUE := true
+BOARD_USE_MHEAP_SCREENSHOT := true
+BOARD_EGL_WORKAROUND_BUG_10194508 := true
+TARGET_RUNNING_WITHOUT_SYNC_FRAMEWORK := true
+
+# Sensors
+COMMON_GLOBAL_CFLAGS += -DNEEDS_VECTORIMPL_SYMBOLS
 
 BOARD_HAS_NO_SELECT_BUTTON := true
 # Use this flag if the board has a ext4 partition larger than 2gb
@@ -74,17 +85,20 @@ BOARD_HAS_LARGE_FILESYSTEM := true
 # Already disabled in kernel, but disable again for safety
 BOARD_SUPPRESS_EMMC_WIPE := true
 
-#BOARD_SEPOLICY_DIRS += \
-#        device/acer/t30-common/sepolicy
+# healthd
+BOARD_HAL_STATIC_LIBRARIES := libhealthd.t30
 
-#BOARD_SEPOLICY_UNION += \
-#        file_contexts \
-#        genfs_contexts \
-#        app.te \
-#        device.te \
-#        drmserver.te \
-#        file.te \
-#        mediaserver.te \
-#        surfaceflinger.te \
-#        system.te \
-#        zygote.te
+BOARD_SEPOLICY_DIRS += \
+	device/acer/t30-common/sepolicy
+
+BOARD_SEPOLICY_UNION += \
+	file_contexts \
+	genfs_contexts \
+	app.te \
+	device.te \
+	drmserver.te \
+	file.te \
+	mediaserver.te \
+	surfaceflinger.te \
+	system.te \
+	zygote.te
