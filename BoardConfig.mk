@@ -88,6 +88,8 @@ BOARD_SUPPRESS_EMMC_WIPE := true
 # healthd
 BOARD_HAL_STATIC_LIBRARIES := libhealthd.t30
 
+TARGET_RELEASETOOLS_EXTENSIONS := device/acer/t30-common
+
 BOARD_SEPOLICY_DIRS += \
 	device/acer/t30-common/sepolicy
 

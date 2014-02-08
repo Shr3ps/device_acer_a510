@@ -358,3 +358,9 @@ on property:sys.cpu.mode=1
 # Performance
 on property:sys.cpu.mode=2
     write /sys/dev-power_mode/power_mode 1
+
+# Disable 3G on A510
+on property:ro.boot.carrier=wifi-only
+    setprop ro.radio.noril yes
+    setprop telephony.sms.receive false
+    setprop telephony.sms.send false

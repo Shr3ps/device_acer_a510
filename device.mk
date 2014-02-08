@@ -49,6 +49,7 @@ PRODUCT_COPY_FILES += \
 
 PRODUCT_COPY_FILES += \
     frameworks/native/data/etc/tablet_core_hardware.xml:system/etc/permissions/tablet_core_hardware.xml \
+    frameworks/native/data/etc/android.hardware.telephony.gsm.xml:system/etc/permissions/android.hardware.telephony.gsm.xml \
     frameworks/native/data/etc/android.hardware.location.gps.xml:system/etc/permissions/android.hardware.location.gps.xml \
     frameworks/native/data/etc/android.hardware.wifi.xml:system/etc/permissions/android.hardware.wifi.xml \
     frameworks/native/data/etc/android.hardware.wifi.direct.xml:system/etc/permissions/android.hardware.wifi.direct.xml \
@@ -64,6 +65,8 @@ PRODUCT_COPY_FILES += \
 #    device/acer/a510/prebuilt/etc/vold.fstab:system/etc/vold.fstab
 PRODUCT_COPY_FILES += \
     device/acer/a510/prebuilt/etc/gps/gpsconfig.xml:system/etc/gps/gpsconfig.xml \
+    device/acer/t30-common/prebuilt/etc/ppp/ip-up:system/etc/ppp/ip-up \
+    device/acer/t30-common/prebuilt/etc/ppp/ip-down:system/etc/ppp/ip-down \
     device/acer/a510/prebuilt/usr/idc/acer-touch.idc:system/usr/idc/acer-touch.idc \
     device/acer/a510/prebuilt/usr/keylayout/Acer-AK00LB.kl:system/usr/keylayout/Acer-AK00LB.kl \
     device/acer/a510/prebuilt/usr/keylayout/Acer-ICONIA-TAB-KB01.kl:system/usr/keylayout/Acer-ICONIA-TAB-KB01.kl \
