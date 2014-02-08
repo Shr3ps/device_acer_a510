@@ -88,6 +88,9 @@ BOARD_SUPPRESS_EMMC_WIPE := true
 # healthd
 BOARD_HAL_STATIC_LIBRARIES := libhealthd.t30
 
+# CMHW
+BOARD_HARDWARE_CLASS := device/acer/t30-common/cmhw/
+
 TARGET_RELEASETOOLS_EXTENSIONS := device/acer/t30-common
 
 BOARD_SEPOLICY_DIRS += \

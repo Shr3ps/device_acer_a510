@@ -1,9 +1,7 @@
 $(call inherit-product, $(SRC_TARGET_DIR)/product/languages_full.mk)
 
-# The gps config appropriate for this device (TODO)
+# The gps config appropriate for this device
 $(call inherit-product, device/common/gps/gps_us_supl.mk)
-
-# TODO: LtoDownloader
 
 $(call inherit-product-if-exists, vendor/acer/a510/a510-vendor.mk)
 
