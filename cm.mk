@@ -9,7 +9,7 @@ TARGET_SCREEN_WIDTH := 1280
 TARGET_SCREEN_HEIGHT := 800
 
 # Inherit some common CM stuff.
-$(call inherit-product, vendor/cm/config/common_full_tablet_wifionly.mk)
+$(call inherit-product, vendor/cm/config/common_full_phone.mk)
 
 # Inherit device configuration
 $(call inherit-product, device/acer/a510/full_a510.mk)

@@ -2,6 +2,7 @@ on boot
 # Set USB manufacturer and product name
     write /sys/class/android_usb/android0/iManufacturer $ro.product.manufacturer
     write /sys/class/android_usb/android0/iProduct "Acer Iconia Tab A510"
+    write /sys/class/android_usb/android0/f_rndis/wceis 1
 
 # Used to disable USB when switching states
 on property:sys.usb.config=none
@@ -16,6 +17,9 @@ on property:sys.usb.config=mtp,adb
     write /sys/class/android_usb/android0/idProduct 3376
     write /sys/class/android_usb/android0/functions $sys.usb.config
     write /sys/class/android_usb/android0/iSerial $ro.serialno
+    write /sys/class/android_usb/android0/bDeviceClass 0
+    write /sys/class/android_usb/android0/bDeviceSubClass 0
+    write /sys/class/android_usb/android0/bDeviceProtocol 0
     write /sys/class/android_usb/android0/enable 1
     start adbd
     setprop sys.usb.state $sys.usb.config
@@ -26,6 +30,9 @@ on property:sys.usb.config=mtp
     write /sys/class/android_usb/android0/idProduct 3378
     write /sys/class/android_usb/android0/functions $sys.usb.config
     write /sys/class/android_usb/android0/iSerial $ro.serialno
+    write /sys/class/android_usb/android0/bDeviceClass 0
+    write /sys/class/android_usb/android0/bDeviceSubClass 0
+    write /sys/class/android_usb/android0/bDeviceProtocol 0
     write /sys/class/android_usb/android0/enable 1
     setprop sys.usb.state $sys.usb.config
 
@@ -35,6 +42,9 @@ on property:sys.usb.config=accessory
     write /sys/class/android_usb/android0/idVendor 18d1
     write /sys/class/android_usb/android0/idProduct 2d00
     write /sys/class/android_usb/android0/functions $sys.usb.config
+    write /sys/class/android_usb/android0/bDeviceClass 0
+    write /sys/class/android_usb/android0/bDeviceSubClass 0
+    write /sys/class/android_usb/android0/bDeviceProtocol 0
     write /sys/class/android_usb/android0/enable 1
     setprop sys.usb.state $sys.usb.config
 
@@ -44,9 +54,37 @@ on property:sys.usb.config=accessory,adb
     write /sys/class/android_usb/android0/idVendor 18d1
     write /sys/class/android_usb/android0/idProduct 2d01
     write /sys/class/android_usb/android0/functions $sys.usb.config
+    write /sys/class/android_usb/android0/bDeviceClass 0
+    write /sys/class/android_usb/android0/bDeviceSubClass 0
+    write /sys/class/android_usb/android0/bDeviceProtocol 0
     write /sys/class/android_usb/android0/enable 1
     start adbd
     setprop sys.usb.state $sys.usb.config
+
+# USB rndis configuration (Using A511 id)
+on property:sys.usb.config=rndis
+    write /sys/class/android_usb/android0/enable 0
+    write /sys/class/android_usb/android0/idVendor 0502
+    write /sys/class/android_usb/android0/idProduct 337b
+    write /sys/class/android_usb/android0/functions ${sys.usb.config}
+    write /sys/class/android_usb/android0/bDeviceClass 239
+    write /sys/class/android_usb/android0/bDeviceSubClass 2
+    write /sys/class/android_usb/android0/bDeviceProtocol 1
+    write /sys/class/android_usb/android0/enable 1
+    setprop sys.usb.state ${sys.usb.config}
+
+# USB rndis configuration, with adb
+on property:sys.usb.config=rndis,adb
+    write /sys/class/android_usb/android0/enable 0
+    write /sys/class/android_usb/android0/idVendor 0502
+    write /sys/class/android_usb/android0/idProduct 337a
+    write /sys/class/android_usb/android0/functions ${sys.usb.config}
+    write /sys/class/android_usb/android0/bDeviceClass 239
+    write /sys/class/android_usb/android0/bDeviceSubClass 2
+    write /sys/class/android_usb/android0/bDeviceProtocol 1
+    write /sys/class/android_usb/android0/enable 1
+    start adbd
+    setprop sys.usb.state ${sys.usb.config}
 
 on property:sys.usb.config=ptp
     write /sys/class/android_usb/android0/enable 0
@@ -54,6 +92,9 @@ on property:sys.usb.config=ptp
     write /sys/class/android_usb/android0/idProduct 3396
     write /sys/class/android_usb/android0/functions $sys.usb.config
     write /sys/class/android_usb/android0/iSerial $ro.serialno
+    write /sys/class/android_usb/android0/bDeviceClass 0
+    write /sys/class/android_usb/android0/bDeviceSubClass 0
+    write /sys/class/android_usb/android0/bDeviceProtocol 0
     write /sys/class/android_usb/android0/enable 1
     setprop sys.usb.state $sys.usb.config
 
@@ -63,6 +104,9 @@ on property:sys.usb.config=ptp,adb
     write /sys/class/android_usb/android0/idProduct 3395
     write /sys/class/android_usb/android0/functions $sys.usb.config
     write /sys/class/android_usb/android0/iSerial $ro.serialno
+    write /sys/class/android_usb/android0/bDeviceClass 0
+    write /sys/class/android_usb/android0/bDeviceSubClass 0
+    write /sys/class/android_usb/android0/bDeviceProtocol 0
     write /sys/class/android_usb/android0/enable 1
     start adbd
     setprop sys.usb.state $sys.usb.config
