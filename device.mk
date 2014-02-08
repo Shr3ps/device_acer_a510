@@ -8,7 +8,7 @@ $(call inherit-product-if-exists, vendor/acer/a510/a510-vendor.mk)
 PRODUCT_AAPT_CONFIG := normal large xlarge hdpi
 PRODUCT_AAPT_PREF_CONFIG := xlarge hdpi
 
-DEVICE_PACKAGE_OVERLAYS += device/acer/a510/overlay
+#DEVICE_PACKAGE_OVERLAYS += device/acer/a510/overlay
 
 PRODUCT_PROPERTY_OVERRIDES := \
     ro.opengles.version=131072 \
