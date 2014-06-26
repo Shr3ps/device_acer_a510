@@ -1,4 +1,4 @@
-<!-- TinyHAL configuration file for Acer A510 -->
+<!-- TinyHAL configuration file for Acer A700/A510 -->
 <tinyhal>
 
     <path>
@@ -19,6 +19,7 @@
         <ctl name="Left Input Mux" val="IN3L" />
         <ctl name="Mic Bias Switch" val="0" />
         <ctl name="Headphone Volume" val="48" />
+        <ctl name="Speaker Volume" val="63" />
         <ctl name="Speaker Switch" val="1" />
     </path>
 
@@ -27,7 +28,7 @@
             <ctl name="Int Spk Switch" val="1" />
             <ctl name="Right Speaker Mixer DACR Switch" val="1" />
             <ctl name="Left Speaker Mixer DACL Switch" val="1" />
-	    <ctl name="Speaker Volume" val="60" />
+	    <ctl name="Speaker Volume" val="63" />
         </path>
         <path name="off">
             <ctl name="Int Spk Switch" val="0" />
