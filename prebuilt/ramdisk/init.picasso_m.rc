@@ -27,6 +27,17 @@ on init
     symlink /storage/usb0 /mnt/usb_storage
 
 on fs
+# Set permission for lvm system
+    chown root shell /lvm/sbin/lvm
+    chmod 777 /lvm/sbin/lvm
+
+# LVM: Wait for block devices to become available, then set up LVM
+# volumes
+    wait /dev/block/platform/sdhci-tegra.3/by-name/APP
+    wait /dev/block/platform/sdhci-tegra.3/by-name/FLX
+    start lvm_vgscan
+    start lvm_vgchange
+
     setprop ro.crypto.tmpfs_options size=128m,mode=0771,uid=1000,gid=1000
     setprop ro.crypto.umount_sd false
     mount_all /fstab.acer
@@ -38,7 +49,7 @@ on post-fs-data
     mkdir /data/nvcam 0700 media camera
     chown dhcp dhcp /data/misc/dhcp
 
-    mkdir /data/gps 700 gps system
+    mkdir /data/gps 770 gps system
     chown gps system /data/gps
 
     # we will remap this as /mnt/sdcard with the sdcard fuse tool
@@ -186,6 +197,17 @@ on boot
 
 # EACK
     chown system system /sys/kernel/debug/tegra_emc/eack_state
+
+# LVM services
+# Scan for LVM physical volumes and set up volume groups
+service lvm_vgscan /lvm/sbin/lvm vgscan --mknodes --ignorelockingfailure
+    disabled
+    oneshot
+
+# Activate LVM logical volumes in found volume groups
+service lvm_vgchange /lvm/sbin/lvm vgchange -aly --ignorelockingfailure
+    disabled
+    oneshot
 
 service p2p_supplicant /system/bin/wpa_supplicant \
     -iwlan0 -Dnl80211 -c/data/misc/wifi/wpa_supplicant.conf \

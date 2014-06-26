@@ -1,0 +1,31 @@
+on boot
+    # set permission for lvm system
+    chown root shell /lvm/sbin/lvm
+    chmod 777 /lvm/sbin/lvm
+    chown root shell /lvm/sbin/setuplvmsystem.sh
+    chmod 777 /lvm/sbin/setuplvmsystem.sh
+
+# LVM: Wait for block devices to become available, then set up LVM
+# volumes
+    wait /dev/block/platform/sdhci-tegra.3/by-name/APP
+    wait /dev/block/platform/sdhci-tegra.3/by-name/FLX
+    start lvm_vgscan
+    start lvm_vgchange
+    wait 4
+    start lvm_setup
+
+# LVM services
+# Scan for LVM physical volumes and set up volume groups
+service lvm_vgscan /lvm/sbin/lvm vgscan --mknodes --ignorelockingfailure
+    disabled
+    oneshot
+
+# Activate LVM logical volumes in found volume groups
+service lvm_vgchange /lvm/sbin/lvm vgchange -aly --ignorelockingfailure
+    disabled
+    oneshot
+
+# setup lvm system
+service lvm_setup /lvm/sbin/setuplvmsystem.sh
+    disabled
+    oneshot

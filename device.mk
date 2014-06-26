@@ -40,10 +40,17 @@ PRODUCT_TAGS += dalvik.gc.type-precise
 
 PRODUCT_COPY_FILES += \
     device/acer/a510/prebuilt/ramdisk/init.picasso_m.rc:root/init.picasso_m.rc \
-    device/acer/t30-common/prebuilt/ramdisk/fstab.acer:root/fstab.acer \
-    device/acer/t30-common/prebuilt/ramdisk/fstab.acer:root/fstab.picasso_m \
+    device/acer/a510/prebuilt/ramdisk/fstab.acer:root/fstab.acer \
+    device/acer/a510/prebuilt/ramdisk/fstab.acer:root/fstab.picasso_m \
     device/acer/a510/prebuilt/ramdisk/ueventd.picasso_m.rc:root/ueventd.picasso_m.rc \
     device/acer/a510/prebuilt/ramdisk/init.picasso_m.usb.rc:root/init.picasso_m.usb.rc \
+    device/acer/a510/prebuilt/ramdisk/init.recovery.picasso_m.rc:root/init.recovery.picasso_m.rc \
+
+# LVM mod
+PRODUCT_COPY_FILES += \
+    device/acer/a510/prebuilt/ramdisk/lvm/etc/lvm.conf:root/lvm/etc/lvm.conf \
+    device/acer/a510/prebuilt/ramdisk/lvm/sbin/lvm:root/lvm/sbin/lvm \
+    device/acer/a510/prebuilt/ramdisk/lvm/sbin/setuplvmsystem.sh:recovery/root/lvm/sbin/setuplvmsystem.sh \
 
 PRODUCT_COPY_FILES += \
     frameworks/native/data/etc/tablet_core_hardware.xml:system/etc/permissions/tablet_core_hardware.xml \
