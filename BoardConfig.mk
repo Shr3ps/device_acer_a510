@@ -28,7 +28,7 @@ BOARD_USERDATAIMAGE_PARTITION_SIZE := 29905387520
 BOARD_FLASH_BLOCK_SIZE := 4096
 #RECOVERY_FSTAB_VERSION := 1
 #TARGET_RECOVERY_FSTAB := device/acer/a510/fstab.a510
-TARGET_RECOVERY_FSTAB := device/acer/t30-common/prebuilt/ramdisk/fstab.acer
+TARGET_RECOVERY_FSTAB := device/acer/a510/prebuilt/ramdisk/fstab.acer
 RECOVERY_FSTAB_VERSION := 2
 
 # Wifi related defines
@@ -107,3 +107,5 @@ BOARD_SEPOLICY_UNION += \
 	surfaceflinger.te \
 	system.te \
 	zygote.te
+
+BOARD_CUSTOM_BOOTIMG_MK := device/acer/a510/custombootimg.mk
