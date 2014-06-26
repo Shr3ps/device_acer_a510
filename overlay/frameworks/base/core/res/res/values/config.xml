@@ -102,11 +102,6 @@
     The default represents a dual-mode smartphone -->
     <string translatable="false" name="config_wifi_p2p_device_type">1-0050F204-1</string>
 
-    <string-array name="config_locationProviderPackageNames" translatable="false">
-        <item>com.android.location.fused</item>
-        <item>com.google.android.location</item>
-    </string-array>
-
     <!-- Flag indicating whether the we should enable the automatic brightness in Settings.
          Software implementation will be used if config_hardware_auto_brightness_available is not set -->
     <bool name="config_automatic_brightness_available">true</bool>
