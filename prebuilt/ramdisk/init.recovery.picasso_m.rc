@@ -11,7 +11,7 @@ on boot
     wait /dev/block/platform/sdhci-tegra.3/by-name/FLX
     start lvm_vgscan
     start lvm_vgchange
-    wait 4
+    wait 5
     start lvm_setup
 
 # LVM services
